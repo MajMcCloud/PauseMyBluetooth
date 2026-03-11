@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>PauseMyBluetooth</AssemblyName>
+    <RootNamespace>PauseMyBluetooth</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>PauseMyBluetooth.ico</ApplicationIcon>
+    <!-- Pure Windows API via P/Invoke — no external NuGet packages required -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="PauseMyBluetooth.ico" />
+  </ItemGroup>
+
+</Project>
