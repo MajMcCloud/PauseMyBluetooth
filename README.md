@@ -1,6 +1,14 @@
 # PauseMyBluetooth
 
-PauseMyBluetooth is a small utility that makes it easier to disable the automatic reconnect behavior for Bluetooth adapters or specific Bluetooth devices on Windows.
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/MajMcCloud/PauseMyBluetooth?style=flat-square) ![GitHub](https://img.shields.io/github/license/MajMcCloud/PauseMyBluetooth?style=flat-square)
+
+
+|| |
+|:-----:||:-----:|
+| ![Icon](PauseMyBluetooth.ico) | **PauseMyBluetooth** is a small utility that makes it easier to disable the automatic reconnect behavior for Bluetooth adapters or specific Bluetooth devices on Windows. |
+| | |
+
+
 
 [![Screenshot of PauseMyBluetooth](Assets/main-window.png)](Assets/main-window.png)
 
