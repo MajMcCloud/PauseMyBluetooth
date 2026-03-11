@@ -1,6 +1,7 @@
 using PauseMyBluetooth.APIs;
 using PauseMyBluetooth.Models;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace PauseMyBluetooth;
 
@@ -15,6 +16,8 @@ public partial class frmMainForm : Form
         SetupDataGridView();
         SetupRefreshTimer();
         _ = RefreshDevicesAsync();
+
+        lblVersion.Text = $"{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}";
     }
 
     // -----------------------------------------------------------------------
@@ -139,13 +142,13 @@ public partial class frmMainForm : Form
         if (chkAutoRefresh.Checked)
         {
             _refreshTimer.Start();
-            lblStatus.Text = "Automatisches Aktualisieren aktiviert.";
+            lblStatus.Text = "Auto-Refresh enabled.";
             lblStatus.ForeColor = Color.FromArgb(180, 180, 180);
         }
         else
         {
             _refreshTimer.Stop();
-            lblStatus.Text = "Automatisches Aktualisieren deaktiviert.";
+            lblStatus.Text = "Auto-Refresh disabled";
             lblStatus.ForeColor = Color.FromArgb(180, 180, 180);
         }
     }
