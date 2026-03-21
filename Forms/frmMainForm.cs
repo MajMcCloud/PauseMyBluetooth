@@ -269,4 +269,18 @@ public partial class frmMainForm : Form
             btnToggle.Text = "Toggle Auto-Connect";
         }
     }
+
+
+    private void LlRepo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://github.com/MajMcCloud/PauseMyBluetooth") { UseShellExecute = true });
+        }
+        catch
+        {
+            // ignore in designer code; runtime can handle failures elsewhere
+        }
+    }
 }

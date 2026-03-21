@@ -64,18 +64,9 @@ partial class frmMainForm
             AutoSize = true,
             Cursor = Cursors.Hand
         };
-        // Open repo in default browser
-        llRepo.LinkClicked += (s, e) =>
-        {
-            try
-            {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://github.com/MajMcCloud/PauseMyBluetooth") { UseShellExecute = true });
-            }
-            catch
-            {
-                // ignore in designer code; runtime can handle failures elsewhere
-            }
-        };
+
+        llRepo.LinkClicked += LlRepo_LinkClicked;
+
         pnlRepoBottom.Controls.Add(llRepo);
 
 
