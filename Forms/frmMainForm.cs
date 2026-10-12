@@ -158,6 +158,12 @@ public partial class frmMainForm : Form
     // -----------------------------------------------------------------------
     private async Task RefreshDevicesAsync()
     {
+        if (InvokeRequired)
+        {
+            Invoke(new Action(async () => await RefreshDevicesAsync()));
+            return;
+        }
+
         btnRefresh.Enabled = false;
         lblStatus.Text = "Loading devices …";
         lblStatus.ForeColor = Color.FromArgb(180, 180, 180);
@@ -204,6 +210,55 @@ public partial class frmMainForm : Form
                 if ((rows as DataGridViewRow)?.DataBoundItem is not BluetoothDevice dev)
                     continue;
 
+
+                if (dev.ProblemCode == NativeMethods.CM_PROB_FAILED_POST_START)
+                {
+                    await Task.Run(async () =>
+                    {
+                        DeviceService.DisableDevice(dev);
+
+                        await Task.Delay(5000);
+
+                        DeviceService.EnableDevice(dev);
+
+                        await RefreshDevicesAsync();
+
+                        Invoke(new Action(() =>
+                        {
+                            lblStatus.Text = $"{dev.FriendlyName}: Enabled";
+                            lblStatus.ForeColor = Color.FromArgb(80, 200, 120);
+                        }));
+
+                    });
+
+                    continue;
+                }
+
+
+
+                if (dev.ProblemCode == NativeMethods.CM_PROB_FAILED_START)
+                {
+                    await Task.Run(async () =>
+                    {
+                        DeviceService.DisableDevice(dev);
+
+                        await Task.Delay(5000);
+
+                        DeviceService.EnableDevice(dev);
+
+                        await RefreshDevicesAsync();
+
+                        Invoke(new Action(() =>
+                        {
+                            lblStatus.Text = $"{dev.FriendlyName}: Enabled";
+                            lblStatus.ForeColor = Color.FromArgb(80, 200, 120);
+                        }));
+
+                    });
+
+                    continue;
+                }
+
                 bool disabling = dev.AutoConnectEnabled;
 
                 await Task.Run(() =>
@@ -233,6 +288,7 @@ public partial class frmMainForm : Form
             btnRefresh.Enabled = true;
             UpdateButtonStates();
         }
+
     }
 
     // -----------------------------------------------------------------------
@@ -252,6 +308,14 @@ public partial class frmMainForm : Form
         if (dgvDevices.CurrentRow?.DataBoundItem is BluetoothDevice dev)
         {
             btnToggle.Enabled = true;
+
+            if (dev.ProblemCode == NativeMethods.CM_PROB_FAILED_POST_START)
+            {
+                btnToggle.Text = "Re-Enable Device";
+                btnToggle.BackColor = Color.FromArgb(20, 170, 170);
+                return;
+            }
+
             if (dev.AutoConnectEnabled)
             {
                 btnToggle.Text = "Disable Auto-Connect";

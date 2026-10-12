@@ -89,7 +89,9 @@ public static class DeviceService
                     InstancePath       = instance_path,
                     Class              = className,
                     Status             = FormatStatus(status, problem),
-                    AutoConnectEnabled = IsEnabled(status, problem)
+                    AutoConnectEnabled = IsEnabled(status, problem),
+                    StatusCode = status,
+                    ProblemCode = problem
                 });
             }
         }
@@ -200,6 +202,11 @@ public static class DeviceService
 
         //if ((status & NativeMethods.DN_DISABLEABLE) != 0) return "Disabled";
         if ((status & NativeMethods.DN_STARTED) != 0) return "OK";
+
+        if (problem == NativeMethods.CM_PROB_FAILED_POST_START)
+            return "Driver failed";
+
+
         return "Unknown";
     }
 

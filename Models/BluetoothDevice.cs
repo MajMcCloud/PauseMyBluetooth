@@ -15,5 +15,8 @@ public class BluetoothDevice
 
     public override string ToString() => FriendlyName;
 
+    public uint StatusCode { get; set; }
+
+    public uint ProblemCode { get; set; }
     
 }

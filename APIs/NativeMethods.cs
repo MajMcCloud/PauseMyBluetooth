@@ -95,7 +95,9 @@ internal static class NativeMethods
     public const uint DN_DISABLEABLE = 0x00002000; // device can be disabled
 
     //CM device problem codes
+    public const int CM_PROB_FAILED_START = 0x0000000A; //10 failed start
     public const uint CM_PROB_DISABLED = 0x00000016; //22 "This device is disabled."
+    public const uint CM_PROB_FAILED_POST_START = 0x0000002B; //43 The drivers set the device state to failed
 
     // CM return codes
     public const uint CR_SUCCESS = 0x00000000;
